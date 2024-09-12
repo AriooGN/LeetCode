@@ -1,16 +1,6 @@
-class Solution(object):
-    def containsDuplicate(self, nums):
-        """
-        :type nums: List[int]
-        :rtype: bool
-        """
-        if(len(nums) <= 1):
-            return False
-        
-        nums.sort()
-        for i, num in enumerate(nums):
-            if(num == nums[i-1]):
-                return True
-        
-        return False
+class Solution:
+    def containsDuplicate(self, nums: List[int]) -> bool:
+        num_set = set(nums)
+
+        return len(nums) != len(num_set)
         
