@@ -1,21 +1,16 @@
+from typing import List
+
 class Solution:
     def groupAnagrams(self, strs: List[str]) -> List[List[str]]:
-        hashset = set()  # Creating an empty set
-        strs = sorted(strs)  # Sorting the input list
+        # Dictionary to store sorted word as key and list of anagrams as value
+        anagrams = {}
         
-        for i in range(len(strs)):
-            # Convert each string to a sorted list of characters
-            sorted_str = ''.join(sorted(strs[i]))
-            hashset.add(sorted_str)  # Adding sorted string to the set
+        for word in strs:
+            # Sort the word and use it as a key
+            sorted_word = "".join(sorted(word))
+            if sorted_word not in anagrams:
+                anagrams[sorted_word] = []
+            anagrams[sorted_word].append(word)
         
-        # Initialize a dictionary to store anagrams
-        anagram_dict = {sorted_str: [] for sorted_str in hashset}
-        
-        # Populate the anagram dictionary
-        for i in range(len(strs)):
-            sorted_str = ''.join(sorted(strs[i]))
-            anagram_dict[sorted_str].append(strs[i])
-        
-        # Extract values (lists of anagrams) from the dictionary
-        returnList = list(anagram_dict.values())
-        return returnList
+        # Return the values of the dictionary as a list of lists
+        return list(anagrams.values())
