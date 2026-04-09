@@ -1,16 +1,15 @@
-from typing import List
+from collections import defaultdict
 
 class Solution:
-    def groupAnagrams(self, strs: List[str]) -> List[List[str]]:
-        # Dictionary to store sorted word as key and list of anagrams as value
-        anagrams = {}
-        
-        for word in strs:
-            # Sort the word and use it as a key
-            sorted_word = "".join(sorted(word))
-            if sorted_word not in anagrams:
-                anagrams[sorted_word] = []
-            anagrams[sorted_word].append(word)
-        
-        # Return the values of the dictionary as a list of lists
-        return list(anagrams.values())
+    def groupAnagrams(self, strs: List[str]) -> List[List[str]]:  # Receives a list of words and returns grouped anagrams.
+        groups = {}  # Stores words by their sorted-letter key.
+
+        for word in strs:  # Look at each word one by one.
+            key = ''.join(sorted(word))  # Sort letters so anagrams produce the same key.
+            if key not in groups:  # Create a new group the first time we see this key.
+                groups[key] = []
+            groups[key].append(word)  # Add the word to its matching group.
+
+        result = list(groups.values())  # Convert the grouped values into a normal list.
+        print(result)  # Show the grouped anagrams.
+        return result  # Return the grouped anagrams.
